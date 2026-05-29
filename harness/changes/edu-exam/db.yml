@@ -1,0 +1,31 @@
+service: edu-exam
+version: 1.0.0
+
+database:
+  name: edu_exam
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_exam?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: exam_plan
+    comment: 考试安排表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - course_id: BIGINT, NOT NULL, 课程ID
+      - classroom_id: BIGINT, 考场教室ID
+      - academic_year: VARCHAR(10), 学年
+      - semester: INT, 学期
+      - exam_time: DATETIME, 考试时间
+      - duration: INT, 时长(分钟)
+      - exam_type: VARCHAR(20), 考试类型
+      - status: VARCHAR(20), DEFAULT 'SCHEDULED', 状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0

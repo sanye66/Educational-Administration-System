@@ -1,0 +1,30 @@
+service: edu-graduation
+version: 1.0.0
+
+database:
+  name: edu_graduation
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_graduation?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: graduation_topic
+    comment: 毕设题目表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - title: VARCHAR(200), NOT NULL, 毕设题目
+      - description: TEXT, 描述
+      - teacher_id: BIGINT, 指导教师ID
+      - student_id: BIGINT, 学生ID
+      - academic_year: VARCHAR(10), 学年
+      - difficulty: VARCHAR(20), DEFAULT 'MEDIUM', 难度
+      - status: VARCHAR(20), DEFAULT 'AVAILABLE', 状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0

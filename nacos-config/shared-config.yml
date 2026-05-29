@@ -1,0 +1,41 @@
+# 公共配置 - 所有服务共享
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        file-extension: yml
+        group: DEFAULT_GROUP
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:localhost:8858}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+# 链路追踪
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+
+# Spring Boot Admin
+spring.boot.admin.client:
+  url: ${ADMIN_SERVER_URL:http://localhost:8093}
+  username: admin
+  password: admin123
+  instance:
+    prefer-ip: false
+
+# MyBatis-Plus
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

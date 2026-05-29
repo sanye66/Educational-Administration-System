@@ -1,0 +1,144 @@
+pipeline:
+  name: edu-system-build
+  identifier: edu_system_build
+  projectIdentifier: educational_administration
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Maven Build
+                  identifier: maven_build
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-17
+                    shell: Sh
+                    command: |
+                      mvn clean package -DskipTests -B
+              - step:
+                  type: Run
+                  name: Unit Tests
+                  identifier: unit_tests
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-17
+                    shell: Sh
+                    command: |
+                      mvn test -B
+              - step:
+                  type: Run
+                  name: SonarQube Analysis
+                  identifier: sonar_analysis
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-17
+                    shell: Sh
+                    command: |
+                      mvn sonar:sonar \
+                        -Dsonar.projectKey=edu-system \
+                        -Dsonar.host.url=${SONAR_HOST_URL} \
+                        -Dsonar.login=${SONAR_TOKEN}
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          slsa_provenance:
+            enabled: false
+    - stage:
+        name: Docker Build
+        identifier: Docker_Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push Gateway
+                  identifier: build_push_gateway
+                  spec:
+                    connectorRef: dockerhub
+                    repo: edu-system/edu-gateway
+                    tags:
+                      - latest
+                      - <+codebase.commitSha>
+                    dockerfile: edu-gateway/Dockerfile
+                    context: .
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push Auth
+                  identifier: build_push_auth
+                  spec:
+                    connectorRef: dockerhub
+                    repo: edu-system/edu-auth
+                    tags:
+                      - latest
+                      - <+codebase.commitSha>
+                    dockerfile: edu-auth/Dockerfile
+                    context: .
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push User Service
+                  identifier: build_push_user
+                  spec:
+                    connectorRef: dockerhub
+                    repo: edu-system/edu-user
+                    tags:
+                      - latest
+                      - <+codebase.commitSha>
+                    dockerfile: edu-services/edu-user/Dockerfile
+                    context: .
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push AI Gateway
+                  identifier: build_push_ai_gateway
+                  spec:
+                    connectorRef: dockerhub
+                    repo: edu-system/edu-ai-gateway
+                    tags:
+                      - latest
+                      - <+codebase.commitSha>
+                    dockerfile: edu-services/edu-ai-gateway/Dockerfile
+                    context: .
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+    - stage:
+        name: Deploy Dev
+        identifier: Deploy_Dev
+        type: Deployment
+        spec:
+          service:
+            serviceRef: edu_system
+            serviceOverrides: {}
+          environment:
+            environmentRef: dev_env
+            infrastructureDefinitions:
+              - identifier: dev_k8s
+          execution:
+            steps:
+              - step:
+                  type: K8sRollingDeploy
+                  name: Rolling Deploy
+                  identifier: rolling_deploy
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  type: K8sRollingRollback
+                  name: Rollback
+                  identifier: rollback

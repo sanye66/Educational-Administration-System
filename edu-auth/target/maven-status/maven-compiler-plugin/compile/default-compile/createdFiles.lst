@@ -1,0 +1,5 @@
+com\edu\auth\controller\AuthController$RegisterRequest.class
+com\edu\auth\config\SecurityConfig.class
+com\edu\auth\AuthApplication.class
+com\edu\auth\controller\AuthController$LoginRequest.class
+com\edu\auth\controller\AuthController.class

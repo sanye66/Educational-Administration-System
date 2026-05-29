@@ -1,0 +1,8 @@
+{
+    "git.ignoreLimitWarning": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "python.defaultInterpreterPath": "D:\\Anaconda\\python.exe",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/scripts"
+    ]
+}

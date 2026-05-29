@@ -1,0 +1,45 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: edu-monitor
+  security:
+    user:
+      name: admin
+      password: admin123
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        namespace: ${NACOS_NAMESPACE:}
+  boot:
+    admin:
+      ui:
+        title: "教学管理系统 - 监控中心"
+      notify:
+        mail:
+          enabled: false
+        slack:
+          enabled: false
+        discord:
+          enabled: false
+      discovery:
+        enabled: true
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    de.codecentric.boot.admin: info

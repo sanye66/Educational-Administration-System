@@ -1,0 +1,7 @@
+com\edu\user\entity\SysUser.class
+com\edu\user\config\SecurityConfig.class
+com\edu\user\mapper\SysUserMapper.class
+com\edu\user\service\SysUserService.class
+com\edu\user\service\impl\SysUserServiceImpl.class
+com\edu\user\controller\SysUserController.class
+com\edu\user\UserApplication.class

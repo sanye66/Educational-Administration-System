@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for Educational Administration System" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="D:/develop/apache-maven-3.9.11-bin/apache-maven-3.9.11/mvn_repo/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+          <entry name="D:/develop/apache-maven-3.9.11-bin/apache-maven-3.9.11/mvn_repo/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+        </processorPath>
+        <module name="edu-exam" />
+        <module name="edu-common-log" />
+        <module name="edu-classroom" />
+        <module name="edu-selection" />
+        <module name="edu-common-swagger" />
+        <module name="edu-api-course" />
+        <module name="edu-auth" />
+        <module name="edu-course" />
+        <module name="edu-api-student" />
+        <module name="edu-evaluation" />
+        <module name="edu-common-mybatis" />
+        <module name="edu-api-classroom" />
+        <module name="edu-grade" />
+        <module name="edu-user" />
+        <module name="edu-student" />
+        <module name="edu-schedule" />
+        <module name="edu-common-core" />
+        <module name="edu-api-teacher" />
+        <module name="edu-graduation" />
+        <module name="edu-common-redis" />
+        <module name="edu-common-monitor" />
+        <module name="edu-gateway" />
+        <module name="edu-teacher" />
+        <module name="edu-common-security" />
+        <module name="edu-monitor" />
+        <module name="edu-api-user" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

@@ -1,0 +1,5 @@
+com\edu\monitor\config\CorsConfig.class
+com\edu\monitor\config\RestTemplateConfig.class
+com\edu\monitor\controller\MonitorController.class
+com\edu\monitor\config\SecurityConfig.class
+com\edu\monitor\MonitorApplication.class

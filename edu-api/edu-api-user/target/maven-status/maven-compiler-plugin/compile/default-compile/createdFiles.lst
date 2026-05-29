@@ -1,0 +1,3 @@
+com\edu\api\user\UserFeignClient.class
+com\edu\api\user\fallback\UserFeignFallbackFactory$1.class
+com\edu\api\user\fallback\UserFeignFallbackFactory.class

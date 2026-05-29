@@ -1,0 +1,167 @@
+version: '3.8'
+services:
+  # MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: edu-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../sql/schema:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    networks:
+      - edu-network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: edu-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - edu-network
+
+  # Nacos
+  nacos:
+    image: nacos/nacos-server:v2.3.2
+    container_name: edu-nacos
+    environment:
+      MODE: standalone
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    networks:
+      - edu-network
+
+  # Sentinel Dashboard
+  sentinel:
+    image: bladex/sentinel-dashboard:1.8.7
+    container_name: edu-sentinel
+    ports:
+      - "8858:8858"
+    networks:
+      - edu-network
+
+  # Zipkin
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: edu-zipkin
+    ports:
+      - "9411:9411"
+    environment:
+      STORAGE_TYPE: mem
+    networks:
+      - edu-network
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: edu-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.enable-lifecycle'
+    networks:
+      - edu-network
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: edu-grafana
+    ports:
+      - "3300:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    depends_on:
+      - prometheus
+    networks:
+      - edu-network
+
+  # Elasticsearch
+  elasticsearch:
+    image: elasticsearch:8.12.0
+    container_name: edu-elasticsearch
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    networks:
+      - edu-network
+
+  # # Kibana (暂时注释，镜像拉取较慢)
+  # kibana:
+  #   image: kibana:8.12.0
+  #   container_name: edu-kibana
+  #   ports:
+  #     - "5601:5601"
+  #   environment:
+  #     ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+  #   depends_on:
+  #     - elasticsearch
+  #   networks:
+  #     - edu-network
+
+  # RocketMQ NameServer
+  rocketmq-namesrv:
+    image: apache/rocketmq:5.1.4
+    container_name: edu-rocketmq-namesrv
+    ports:
+      - "9876:9876"
+    command: sh mqnamesrv
+    networks:
+      - edu-network
+
+  # RocketMQ Broker
+  rocketmq-broker:
+    image: apache/rocketmq:5.1.4
+    container_name: edu-rocketmq-broker
+    ports:
+      - "10911:10911"
+    environment:
+      NAMESRV_ADDR: rocketmq-namesrv:9876
+    command: sh mqbroker -n rocketmq-namesrv:9876
+    depends_on:
+      - rocketmq-namesrv
+    networks:
+      - edu-network
+
+  # AI Gateway
+  ai-gateway:
+    build:
+      context: ../
+      dockerfile: Dockerfile.ai-gateway
+    container_name: edu-ai-gateway
+    ports:
+      - "8095:8095"
+    environment:
+      NACOS_SERVER_ADDR: nacos:8848
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - nacos
+      - redis
+    networks:
+      - edu-network
+
+volumes:
+  mysql-data:
+  redis-data:
+  es-data:
+
+networks:
+  edu-network:
+    driver: bridge

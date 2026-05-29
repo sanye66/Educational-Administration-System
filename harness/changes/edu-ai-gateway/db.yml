@@ -1,0 +1,43 @@
+service: edu-ai-gateway
+version: 1.0.0
+
+database:
+  name: edu_ai_gateway
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_ai_gateway?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: ai_model_config
+    comment: AI模型配置表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - model_name: VARCHAR(50), NOT NULL, 模型名称
+      - model_type: VARCHAR(20), NOT NULL, 模型类型
+      - api_endpoint: VARCHAR(200), API端点
+      - api_key: VARCHAR(200), API密钥
+      - max_tokens: INT, 最大令牌数
+      - temperature: DECIMAL(3,2), 温度参数
+      - status: VARCHAR(20), DEFAULT 'ACTIVE', 状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0
+  - name: usage_record
+    comment: AI使用记录表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - user_id: BIGINT, NOT NULL, 用户ID
+      - model_id: BIGINT, NOT NULL, 模型ID
+      - prompt_tokens: INT, 提示令牌数
+      - completion_tokens: INT, 完成令牌数
+      - total_tokens: INT, 总令牌数
+      - request_time: DATETIME, 请求时间
+      - response_time: DATETIME, 响应时间
+      - status: VARCHAR(20), 状态
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP

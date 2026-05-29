@@ -1,0 +1,40 @@
+service: edu-user
+version: 1.0.0
+
+database:
+  name: edu_user
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 13306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:13306/edu_user?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&connectionCollation=utf8mb4_unicode_ci&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: sys_user
+    comment: 系统用户表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT, 用户ID
+      - username: VARCHAR(50), NOT NULL, UNIQUE, 用户名
+      - password: VARCHAR(100), NOT NULL, 密码
+      - real_name: VARCHAR(50), 真实姓名
+      - user_type: VARCHAR(20), NOT NULL, 用户类型: ADMIN/TEACHER/STUDENT
+      - email: VARCHAR(100), 邮箱
+      - phone: VARCHAR(20), 手机号
+      - avatar: VARCHAR(200), 头像
+      - gender: TINYINT, DEFAULT 2, 性别: 0-男 1-女 2-未知
+      - status: TINYINT, DEFAULT 0, 状态: 0-正常 1-禁用 2-锁定
+      - create_by: BIGINT, 创建人
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP, 创建时间
+      - update_by: BIGINT, 更新人
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP, 更新时间
+      - deleted: TINYINT, DEFAULT 0, 逻辑删除
+
+data:
+  init_records:
+    - username: admin
+      password: $2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2
+      real_name: 系统管理员
+      user_type: ADMIN
+      status: 0

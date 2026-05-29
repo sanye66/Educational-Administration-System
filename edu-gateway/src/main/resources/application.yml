@@ -1,0 +1,127 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: edu-gateway
+  main:
+    web-application-type: reactive
+  config:
+    import:
+      - optional:nacos:edu-gateway.yml
+      - optional:nacos:shared-config.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        namespace: ${NACOS_NAMESPACE:}
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        namespace: ${NACOS_NAMESPACE:}
+        file-extension: yml
+        shared-configs:
+          - data-id: application.yml
+            refresh: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # 认证服务
+        - id: edu-auth
+          uri: lb://edu-auth
+          predicates:
+            - Path=/auth/**
+        # 用户服务
+        - id: edu-user
+          uri: lb://edu-user
+          predicates:
+            - Path=/user/**
+        # 教师服务
+        - id: edu-teacher
+          uri: lb://edu-teacher
+          predicates:
+            - Path=/teacher/**
+        # 学生服务
+        - id: edu-student
+          uri: lb://edu-student
+          predicates:
+            - Path=/student/**
+        # 课程服务
+        - id: edu-course
+          uri: lb://edu-course
+          predicates:
+            - Path=/course/**
+        # 教室服务
+        - id: edu-classroom
+          uri: lb://edu-classroom
+          predicates:
+            - Path=/classroom/**
+        # 选课服务
+        - id: edu-selection
+          uri: lb://edu-selection
+          predicates:
+            - Path=/selection/**
+        # 成绩服务
+        - id: edu-grade
+          uri: lb://edu-grade
+          predicates:
+            - Path=/grade/**
+        # 考试服务
+        - id: edu-exam
+          uri: lb://edu-exam
+          predicates:
+            - Path=/exam/**
+        # 排课服务
+        - id: edu-schedule
+          uri: lb://edu-schedule
+          predicates:
+            - Path=/schedule/**
+        # 毕设服务
+        - id: edu-graduation
+          uri: lb://edu-graduation
+          predicates:
+            - Path=/graduation/**
+        # 评价服务
+        - id: edu-evaluation
+          uri: lb://edu-evaluation
+          predicates:
+            - Path=/evaluation/**
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:localhost:8080}
+      eager: true
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,gateway
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+
+# Spring Boot Admin
+spring.boot.admin.client:
+  url: ${ADMIN_SERVER_URL:http://localhost:8093}
+  instance:
+    name: edu-gateway
+
+# JWT
+jwt:
+  secret: edu-administration-system-secret-key-for-jwt-token-generation-2024
+  expiration: 86400000
+
+# 日志
+logging:
+  level:
+    com.edu.gateway: debug
+    org.springframework.cloud.gateway: info

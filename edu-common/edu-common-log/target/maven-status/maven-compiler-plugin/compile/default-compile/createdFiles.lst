@@ -1,0 +1,3 @@
+com\edu\common\log\annotation\Log.class
+com\edu\common\log\annotation\OperateType.class
+com\edu\common\log\aspect\LogAspect.class

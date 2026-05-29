@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-classroom/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-classroom/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-course/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-course/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-student/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-student/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-teacher/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-teacher/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/edu-api-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-log/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-log/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-monitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-monitor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-mybatis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-mybatis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-swagger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/edu-common-swagger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-monitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-monitor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-classroom/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-classroom/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-course/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-course/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-evaluation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-evaluation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-exam/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-exam/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-grade/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-grade/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-graduation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-graduation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-schedule/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-schedule/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-selection/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-selection/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-student/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-student/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-teacher/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-teacher/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/edu-user/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/edu-services/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

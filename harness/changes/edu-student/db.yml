@@ -1,0 +1,31 @@
+service: edu-student
+version: 1.0.0
+
+database:
+  name: edu_student
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_student?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: student
+    comment: 学生表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - user_id: BIGINT, NOT NULL, 关联用户ID
+      - student_no: VARCHAR(30), NOT NULL, UNIQUE, 学号
+      - department_id: BIGINT, 院系ID
+      - major_id: BIGINT, 专业ID
+      - class_id: BIGINT, 班级ID
+      - enrollment_year: VARCHAR(10), 入学年份
+      - schooling_length: INT, DEFAULT 4, 学制年限
+      - status: VARCHAR(20), DEFAULT 'ACTIVE', 学籍状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0

@@ -1,0 +1,56 @@
+server:
+  port: 8093
+
+spring:
+  application:
+    name: edu-monitor
+  security:
+    user:
+      name: admin
+      password: admin123
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        namespace: ${NACOS_NAMESPACE:}
+  boot:
+    admin:
+      ui:
+        title: "教学管理系统 - 监控中心"
+      notify:
+        mail:
+          enabled: false
+        slack:
+          enabled: false
+        discord:
+          enabled: false
+      discovery:
+        enabled: true
+
+# Nacos配置
+nacos:
+  server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+
+# Prometheus配置
+prometheus:
+  config:
+    path: ${PROM_CONFIG_PATH:./config/prometheus.yml}
+  reload:
+    url: ${PROM_RELOAD_URL:http://localhost:9090/-/reload}
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    de.codecentric.boot.admin: info

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.edu</groupId>
+        <artifactId>educational-administration-system</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>edu-services</artifactId>
+    <packaging>pom</packaging>
+    <description>业务服务模块</description>
+
+    <modules>
+        <module>edu-user</module>
+        <module>edu-teacher</module>
+        <module>edu-student</module>
+        <module>edu-course</module>
+        <module>edu-classroom</module>
+        <module>edu-selection</module>
+        <module>edu-grade</module>
+        <module>edu-exam</module>
+        <module>edu-schedule</module>
+        <module>edu-graduation</module>
+        <module>edu-evaluation</module>
+        <module>edu-ai-gateway</module>
+    </modules>
+
+    <dependencies>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Nacos Discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- Sentinel -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <!-- OpenFeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <!-- Loadbalancer -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
+        <!-- Common Modules -->
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-monitor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,6 @@
+com\edu\selection\SelectionApplication.class
+com\edu\selection\entity\SelectionRecord.class
+com\edu\selection\service\impl\SelectionServiceImpl.class
+com\edu\selection\mapper\SelectionMapper.class
+com\edu\selection\service\SelectionService.class
+com\edu\selection\controller\SelectionController.class

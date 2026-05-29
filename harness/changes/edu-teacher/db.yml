@@ -1,0 +1,30 @@
+service: edu-teacher
+version: 1.0.0
+
+database:
+  name: edu_teacher
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_teacher?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&connectionCollation=utf8mb4_unicode_ci&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: teacher
+    comment: 教师表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - user_id: BIGINT, NOT NULL, 关联用户ID
+      - teacher_no: VARCHAR(30), NOT NULL, UNIQUE, 教师工号
+      - department_id: BIGINT, 院系ID
+      - title: VARCHAR(30), 职称
+      - education: VARCHAR(20), 学历
+      - research_direction: VARCHAR(200), 研究方向
+      - entry_date: DATE, 入职日期
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0

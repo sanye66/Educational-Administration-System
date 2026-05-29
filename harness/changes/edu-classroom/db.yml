@@ -1,0 +1,31 @@
+service: edu-classroom
+version: 1.0.0
+
+database:
+  name: edu_classroom
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_classroom?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: classroom
+    comment: 教室表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - room_no: VARCHAR(30), NOT NULL, UNIQUE, 教室编号
+      - room_name: VARCHAR(50), 教室名称
+      - building: VARCHAR(50), 所属建筑
+      - floor: INT, 楼层
+      - capacity: INT, 容量
+      - room_type: VARCHAR(20), 教室类型
+      - equipment: TEXT, 设备描述
+      - status: VARCHAR(20), DEFAULT 'AVAILABLE', 状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0

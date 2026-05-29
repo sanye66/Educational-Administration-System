@@ -1,0 +1,57 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: edu-auth
+  config:
+    import:
+      - optional:nacos:edu-auth.yml
+      - optional:nacos:shared-config.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        file-extension: yml
+    sentinel:
+      transport:
+        dashboard: ${SENTINEL_DASHBOARD:localhost:8080}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: 0
+
+# JWT
+jwt:
+  secret: edu-administration-system-secret-key-for-jwt-token-generation-2024
+  expiration: 86400000
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://localhost:9411/api/v2/spans}
+
+# Spring Boot Admin
+spring.boot.admin.client:
+  url: ${ADMIN_SERVER_URL:http://localhost:8093}
+  instance:
+    name: edu-auth
+
+logging:
+  level:
+    com.edu.auth: debug

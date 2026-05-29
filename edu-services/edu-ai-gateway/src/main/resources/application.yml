@@ -1,0 +1,40 @@
+server:
+  port: 8095
+
+spring:
+  application:
+    name: edu-ai-gateway
+  config:
+    import:
+      - optional:nacos:edu-ai-gateway.yml
+      - optional:nacos:shared-config.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        file-extension: yml
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  level:
+    com.edu.ai-gateway: debug
+    org.springframework.web.reactive: debug

@@ -1,0 +1,61 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: edu-selection
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_selection?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+  cloud:
+    sentinel:
+      datasource:
+        flow:
+          nacos:
+            server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+            data-id: edu-selection-flow-rules
+            group-id: SENTINEL_GROUP
+            rule-type: flow
+
+# Redisson 配置
+redisson:
+  address: redis://${REDIS_HOST:localhost}:${REDIS_PORT:6379}
+  password: ${REDIS_PASSWORD:}
+  database: 0
+
+# Seata 分布式事务
+seata:
+  enabled: true
+  tx-service-group: edu-selection-tx-group
+  registry:
+    type: nacos
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+spring.boot.admin.client:
+  instance:
+    name: edu-selection
+
+logging:
+  level:
+    com.edu.selection: debug

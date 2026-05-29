@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.edu</groupId>
+        <artifactId>educational-administration-system</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>edu-api</artifactId>
+    <packaging>pom</packaging>
+    <description>Feign远程调用API</description>
+
+    <modules>
+        <module>edu-api-user</module>
+        <module>edu-api-teacher</module>
+        <module>edu-api-student</module>
+        <module>edu-api-course</module>
+        <module>edu-api-classroom</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

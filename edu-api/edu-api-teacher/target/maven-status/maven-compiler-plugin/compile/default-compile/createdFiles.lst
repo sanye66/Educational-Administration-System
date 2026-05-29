@@ -1,0 +1,3 @@
+com\edu\api\teacher\TeacherFeignClient.class
+com\edu\api\teacher\fallback\TeacherFeignFallbackFactory.class
+com\edu\api\teacher\fallback\TeacherFeignFallbackFactory$1.class

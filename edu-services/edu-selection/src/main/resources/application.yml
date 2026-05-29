@@ -1,0 +1,45 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: edu-selection
+  config:
+    import:
+      - optional:nacos:edu-selection.yml
+      - optional:nacos:shared-config.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+      config:
+        server-addr: ${NACOS_SERVER_ADDR:localhost:8848}
+        file-extension: yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_selection?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+# Spring Boot Admin
+spring.boot.admin.client:
+  url: http://localhost:8093
+  username: admin
+  password: admin123
+  instance:
+    prefer-ip: false
+
+logging:
+  level:
+    com.edu.selection: debug

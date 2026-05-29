@@ -1,0 +1,74 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'edu-gateway'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-gateway:8080']
+
+  - job_name: 'edu-auth'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-auth:8081']
+
+  - job_name: 'edu-user'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-user:8082']
+
+  - job_name: 'edu-teacher'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-teacher:8083']
+
+  - job_name: 'edu-student'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-student:8084']
+
+  - job_name: 'edu-course'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-course:8085']
+
+  - job_name: 'edu-classroom'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-classroom:8086']
+
+  - job_name: 'edu-selection'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-selection:8087']
+
+  - job_name: 'edu-grade'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-grade:8088']
+
+  - job_name: 'edu-exam'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-exam:8089']
+
+  - job_name: 'edu-schedule'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-schedule:8090']
+
+  - job_name: 'edu-graduation'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-graduation:8091']
+
+  - job_name: 'edu-evaluation'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-evaluation:8092']
+
+  - job_name: 'edu-monitor'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['edu-monitor:8093']

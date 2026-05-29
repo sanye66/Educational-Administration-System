@@ -1,0 +1,33 @@
+service: edu-selection
+version: 1.0.0
+
+database:
+  name: edu_selection
+  type: MySQL
+  host: ${MYSQL_HOST:localhost}
+  port: 3306
+  driver: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/edu_selection?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  charset: utf8mb4
+  collation: utf8mb4_unicode_ci
+
+tables:
+  - name: selection_record
+    comment: 选课记录表
+    columns:
+      - id: BIGINT, PK, AUTO_INCREMENT
+      - student_id: BIGINT, NOT NULL, 学生ID
+      - course_id: BIGINT, NOT NULL, 课程ID
+      - task_id: BIGINT, 选课任务ID
+      - academic_year: VARCHAR(10), 学年
+      - semester: INT, 学期
+      - status: VARCHAR(20), DEFAULT 'SELECTED', 状态
+      - create_by: BIGINT
+      - create_time: DATETIME, DEFAULT CURRENT_TIMESTAMP
+      - update_by: BIGINT
+      - update_time: DATETIME, ON UPDATE CURRENT_TIMESTAMP
+      - deleted: TINYINT, DEFAULT 0
+    indexes:
+      - idx_student_id: student_id
+      - idx_course_id: course_id
+      - uk_student_course: UNIQUE, (student_id, course_id, status)
